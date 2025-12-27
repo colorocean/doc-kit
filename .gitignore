@@ -1,0 +1,6 @@
+# Local working artifacts (generated during doc-kit runs)
+doc-kit/
+
+# Obsidian-friendly symlink mirror of prompts (local only)
+obsidian-links/
+
