@@ -3,10 +3,10 @@ set -euo pipefail
 
 usage() {
   cat <<'EOF'
-Create an Obsidian-friendly mirror of doc-kit prompt files via symlinks.
+Create an Obsidian-friendly mirror of doc-kit prompt files.
 
 This creates:
-  ./obsidian-links/prompts/*.md  ->  ../../prompts/doc.*
+  <dest>/prompts/*.md  ->  prompts/doc.* (via symlink or hardlink)
 
 Usage:
   scripts/obsidian-links.sh [--dest <dir>] [--mode symlink|hardlink]
@@ -47,22 +47,30 @@ if [[ ! -d "$PROMPTS_DIR" ]]; then
   exit 1
 fi
 
-DEST_DIR="$ROOT_DIR/$DEST/prompts"
+DEST_ROOT="$DEST"
+case "$DEST" in
+  /*) ;;
+  *) DEST_ROOT="$ROOT_DIR/$DEST" ;;
+esac
+
+DEST_DIR="$DEST_ROOT/prompts"
 mkdir -p "$DEST_DIR"
 
 shopt -s nullglob
 for src in "$PROMPTS_DIR"/doc.*; do
   base="$(basename "$src")"
-  target="../../prompts/$base"
   out="$DEST_DIR/$base.md"
   rm -f "$out"
 
   case "$MODE" in
     symlink)
-      ln -s "$target" "$out"
+      # Use absolute symlinks so --dest can be nested anywhere under the repo.
+      ln -s "$src" "$out"
       ;;
     hardlink)
-      ln "$ROOT_DIR/prompts/$base" "$out"
+      # Hardlinks allow Obsidian to treat files as normal markdown.
+      # Note: hardlinks require source and dest on the same filesystem.
+      ln "$src" "$out"
       ;;
     *)
       echo "[ERROR] Unknown --mode: $MODE (expected symlink|hardlink)" >&2
@@ -71,5 +79,5 @@ for src in "$PROMPTS_DIR"/doc.*; do
   esac
 done
 
-echo "[OK] Created Obsidian symlink mirror at: $DEST_DIR"
-echo "     Open this repo as an Obsidian vault and browse: $DEST/prompts/"
+echo "[OK] Created Obsidian mirror at: $DEST_DIR"
+echo "     Open this repo as an Obsidian vault and browse: ${DEST#./}/prompts/"
