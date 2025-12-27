@@ -9,19 +9,25 @@ This creates:
   ./obsidian-links/prompts/*.md  ->  ../../prompts/doc.*
 
 Usage:
-  scripts/obsidian-links.sh [--dest <dir>]
+  scripts/obsidian-links.sh [--dest <dir>] [--mode symlink|hardlink]
 
 Options:
   --dest <dir>   Destination directory (default: ./obsidian-links)
+  --mode <mode>  Link mode (default: symlink). Use hardlink if Obsidian doesn't show symlinks.
 EOF
 }
 
 DEST="./obsidian-links"
+MODE="symlink"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --dest)
       DEST="${2:-}"
+      shift 2
+      ;;
+    --mode)
+      MODE="${2:-}"
       shift 2
       ;;
     -h|--help) usage; exit 0 ;;
@@ -47,9 +53,23 @@ mkdir -p "$DEST_DIR"
 shopt -s nullglob
 for src in "$PROMPTS_DIR"/doc.*; do
   base="$(basename "$src")"
-  ln -sf "../../prompts/$base" "$DEST_DIR/$base.md"
+  target="../../prompts/$base"
+  out="$DEST_DIR/$base.md"
+  rm -f "$out"
+
+  case "$MODE" in
+    symlink)
+      ln -s "$target" "$out"
+      ;;
+    hardlink)
+      ln "$ROOT_DIR/prompts/$base" "$out"
+      ;;
+    *)
+      echo "[ERROR] Unknown --mode: $MODE (expected symlink|hardlink)" >&2
+      exit 2
+      ;;
+  esac
 done
 
 echo "[OK] Created Obsidian symlink mirror at: $DEST_DIR"
 echo "     Open this repo as an Obsidian vault and browse: $DEST/prompts/"
-
