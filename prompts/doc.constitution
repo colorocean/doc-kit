@@ -4,7 +4,7 @@
 - 本次仅生成三类文档之一：技术方案 / 产品方案 / 部门规划（不要强行三合一）。
 - 对外可见：技术方案、产品方案（客户 + 内部）。
 - 仅内部：部门规划（必须显式标注【Internal Only】并避免外发信息）。
-- 交付形态：专业 Markdown；默认每个一级标题先给“1 页精简表达（便于转 PPT）”，仅当用户特别指定“转 PPT”时再转为评审型结构。
+- 交付形态：专业 Markdown；默认每个一级标题下先给一段“本章节总结性描述”（1 段即可），再展开细节。
 - 参考篇幅：技术方案约 20 页、产品方案约 20 页、部门规划约 15 页（可根据用户要求调整）。
 
 输出要求（用中文，尽量短，但要可执行）：
@@ -24,8 +24,6 @@ audience: "客户业务/产品/技术；公司产品/技术；CEO"
 visibility: "external+internal | internal-only"
 target_length_pages: 20
 output_file: "./[待确认].md"
-ppt_mode_default: "1-slide-per-H1"
-ppt_mode_on_request: "review"
 data_source_priority: "user-specified > external"
 budget_scope: "salary-only"
 budget_granularity: "100k-level"
@@ -50,7 +48,7 @@ plan_horizon_years: 3
 
 3) 《确认问题》（最多 5 个）：仅问“决定宪章是否成立”的关键缺口，例如：
   - 数据时间戳/口径（截至何时？）
-  - 篇幅上限/交付格式（PPT/Word/Markdown？）
+  - 篇幅上限/交付格式（Markdown/Word/其他？）
   - 约束优先级（时间 vs 成本 vs 质量）
   - 是否允许提出多个方案及推荐强度（强推荐/备选/不做建议）
 
