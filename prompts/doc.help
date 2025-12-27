@@ -5,3 +5,8 @@
 3) 列出全部模板（doc.constitution / doc.clarify / doc.outline / doc.section / doc.compress / doc.style / doc.facts / doc.qacheck）及一句话用途。
 4) 给出推荐流程（约束宪章→澄清→大纲→分段→压缩→风格→事实→QA）以及每步需要用户提供的输入。
 5) 全程中文、简洁、用项目符号输出，不要长篇解释。
+
+额外要求（必须包含）：
+- 说明落盘规则：中间产物写到当前工作目录 `./doc-kit/` 下（`constitution.md`、`clarify.md`、`outline.md`、`draft.md`、`compress.md`、`style.md`、`facts.md`、`qacheck.md`、`sections/*.md`）。
+- 说明“重新读取”原则：进入下一步前会从磁盘重新读取前序文件，以吸收人工修改。
+- 每一步末尾提示推荐的下一步指令（例如 `下一步：$doc-kit doc.outline`）。

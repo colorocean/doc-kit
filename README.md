@@ -14,6 +14,13 @@
 - 进入写作前先约束全流程：`$doc-kit doc.constitution`
 - 兜底方式：直接打开 `prompts/doc.clarify` 等文件，把内容复制到对话里再补充你的背景信息。
 
+## 自动落盘（中间文档会写到当前工作目录）
+从本版本开始，doc-kit 以“磁盘文件”为事实来源，避免只依赖对话上下文（因为你可能会手工改文件）。
+
+- 中间产物目录：`./doc-kit/`
+- 常见文件：`constitution.md`、`clarify.md`、`outline.md`、`draft.md`、`compress.md`、`style.md`、`facts.md`、`qacheck.md`、`sections/*.md`
+- 面向用户交互的最终/最新文档：生成在当前工作目录下（例如 `./tech-proposal.md`），并会在 `doc.section/doc.compress/doc.style` 等步骤中自动更新
+
 ## 目录
 - `SKILL.md`：技能描述（供 skill-creator/installer 使用）
 - `prompts/`：可直接粘贴的提示词

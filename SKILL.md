@@ -17,6 +17,9 @@ metadata:
 - `$doc-kit doc.constitution`
 - `$doc-kit doc.clarify` / `doc.outline` / `doc.section` / `doc.compress` / `doc.style` / `doc.facts` / `doc.qacheck`
 
+## 自动落盘
+执行过程中会把中间产物写到当前工作目录的 `./doc-kit/` 下，并在进入下一步前从磁盘重新读取前序文件以吸收人工修改。
+
 ## Prompts（位于 `prompts/`）
 - `doc.help`：查看使用说明/目录
 - `doc.constitution`：全流程约束（先于澄清/大纲/分段）

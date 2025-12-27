@@ -9,6 +9,31 @@
 
 输出要求（用中文，尽量短，但要可执行）：
 
+## 持久化规则（必须执行）
+1) 在当前工作目录创建/使用 `./doc-kit/` 目录。
+2) 本步骤输出写入 `./doc-kit/constitution.md`（覆盖更新）。
+3) 执行本步骤前，必须**重新读取** `./doc-kit/constitution.md`（若存在，尊重用户手改内容后再更新）。
+
+0) 《元信息》（必须放在文件最开头，便于后续步骤读取）
+用 YAML frontmatter 输出以下字段（可先给默认值，缺失则标 `[待确认]`）：
+```yaml
+---
+doc_type: tech-proposal | product-plan | dept-plan
+title: "[待确认]"
+audience: "客户业务/产品/技术；公司产品/技术；CEO"
+visibility: "external+internal | internal-only"
+target_length_pages: 20
+output_file: "./[待确认].md"
+ppt_mode_default: "1-slide-per-H1"
+ppt_mode_on_request: "review"
+data_source_priority: "user-specified > external"
+budget_scope: "salary-only"
+budget_granularity: "100k-level"
+budget_period: "year"
+plan_horizon_years: 3
+---
+```
+
 1) 《文档宪章》正文（建议 10-16 条要点即可）
   - 读者与决策：明确“谁决策/什么决策/成功标准口径”
   - 文档类型与边界：技术方案 / 产品设计 / 战略规划（或混合）；明确不覆盖的范围
@@ -33,3 +58,8 @@
 - 语气：面向决策者，结论先行，偏执行落地
 - 不编造数据与引用；缺口用 [source:?] / [citation needed] / [待确认]
 - 先问清楚再写；必要时分两轮：宪章确认 → 再进入 `doc.clarify`
+
+## 对话输出（给用户看的）
+- 先展示你写入 `constitution.md` 的内容（可直接复制用）。
+- 明确说明已更新的文件路径：`./doc-kit/constitution.md`
+- 给出推荐下一步指令：`$doc-kit doc.clarify`
