@@ -6,13 +6,24 @@
    - `./doc-kit/qacheck.md`
 3) 执行前必须**重新读取**：
    - `./doc-kit/constitution.md`
+   - `./doc-kit/clarify.md`（用于读取 `clarify_rev` 与锁定范围）
+   - `./doc-kit/outline.md`（若存在，用于对齐章节覆盖）
    - `./<output>.md`（从 `constitution.md` 读取输出文件名；若读不到则询问用户当前交互文档文件名）
+   - `./doc-kit/sections/` 下所有 `S*.md`（若存在，用于检查 `based_on_clarify_rev` 连续性）
    - `./doc-kit/qacheck.md`（若存在，读取后再更新，尊重用户手改）
 
 ## 检查清单（输出 qacheck.md）
 - 覆盖面：是否回答了目标、范围、关键问题/假设、方案选项与取舍（如适用）、风险、时间线/里程碑、Owner。
 - 结构：结论是否前置；每节是否有证据或可验证的依据；行动项是否具体可执行。
 - 质量：术语一致性、数据时间戳、口径一致性、新旧信息冲突、模糊用语。
+- 连续性：
+  - 读取 `clarify.md` 的 `clarify_rev` 与 `locked_sections`。
+  - 若存在 `./doc-kit/sections/S*.md`：检查每个文件是否包含 `based_on_clarify_rev:`，并与当前 `clarify_rev` 一致；不一致则列入缺失项。
+  - 若 `locked_sections` 非空：检查是否存在误影响被锁章节的风险（例如大纲/草稿里将被锁章节标为需要重写，或章节标题/层级发生变化）；发现风险则提示用户复核或解除锁定。
+- 可见性与内部章节隔离（遵守宪章策略 3）：
+  - 从 `constitution.md` 读取 `visibility` 与 `internal_section_suffix`（默认 `（内部章节）`）。
+  - 若 `visibility=external+internal`：检查输出文档中所有“内部章节”标题是否都以 `internal_section_suffix` 结尾；并抽查是否存在疑似敏感内容（人力/薪资预算/组织编制/内部系统细节/客户敏感信息/供应商底价等）出现在非内部章节中；若有，列为高优先级缺失项并给出整改方式（移动到内部章节或脱敏改写）。
+  - 若 `visibility=internal-only`：不强制内部章节后缀，但仍需提醒避免对外泄露风险（如后续可能外发）。
 - 输出：`缺失项清单`（按影响决策程度排序）+ `改进建议`（给到可执行改法），不直接重写全文。
 
 ## 对话输出（给用户看的）
