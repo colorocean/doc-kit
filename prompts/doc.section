@@ -13,6 +13,14 @@
    - `./doc-kit/outline.md`
    - `./doc-kit/draft.md`（若存在，读取用户手改内容后再更新）
 
+## 以宪章为准（必须执行）
+- 必须读取 `./doc-kit/constitution.md` 的 YAML frontmatter，并遵守：
+  - `doc_type` / `visibility`
+  - `visibility_strategy` / `internal_section_suffix`
+  - `output_file`
+- 对于 `visibility=external+internal`：任何“仅内部”内容必须放在标题末尾带 `internal_section_suffix` 的独立子章节中（H2/H3 均可），不得散落在普通段落里。
+- 对于 `visibility=internal-only`：默认不强制使用“内部章节”后缀（除非用户要求区分更敏感小节）。
+
 ## 章节选择（必须支持）
 - 如果用户指定章节 ID（如 `S03`）或章节标题：按指定生成。
 - 如果用户未指定：自动选择第一个仍为占位符的章节（在 `draft.md` 中查找 `<!-- TODO:Sxx -->`）。
@@ -23,6 +31,7 @@
 2) 证据/依据（3-5 条）：数据/实验/用户洞察/行业案例，注明来源或占位符（如 `[source:?]`）。
 3) 风险/反对观点：潜在问题、假设、盲区（标注 `[待确认]`）。
 4) 行动/决策建议：接下来要做什么、Owner、时间节点、依赖（缺失用 `[待补]`）。
+5) 本章节总结性描述（1 段，放在本节末尾）：用来说明“本节包含了哪些内容/覆盖范围/未覆盖什么”，不等同于结论，不要引入新决策。
 保持中文、简洁、可执行，避免堆砌形容词。
 
 ## 回填规则（必须执行）

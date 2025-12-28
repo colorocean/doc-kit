@@ -10,10 +10,21 @@
    - `./doc-kit/clarify.md`（缺失则先补齐）
    - `./doc-kit/outline.md`（若存在，读取后再更新，尊重用户手改）
 
+## 以宪章为准（必须执行）
+- `./doc-kit/constitution.md` 的 YAML frontmatter 是后续步骤的唯一权威来源之一，你必须读取并遵守，尤其是：
+  - `doc_type` / `visibility`
+  - `visibility_strategy` / `internal_section_suffix`
+  - `target_length_pages` / `output_file`
+- 若 `constitution.md` 与 `clarify.md` 冲突：以 `constitution.md` 为准，并在大纲末尾的“未决问题清单”中记录冲突点，请用户确认。
+
 ## 大纲生成要求（写入 outline.md）
 - 层级不超过 3 级；每个一级标题必须带稳定 ID：`[S01]`、`[S02]`…（后续 `doc.section` 用它写对应章节）。
 - 每节给出“要回答的关键问题/预期输出”（用项目符号）。
 - 标记需要数据/引用的段落（用 `[需引用]`），标记风险或待确认事项（用 `[风险]` / `[待确认]`）。
+- 可见性与内部章节（必须遵守宪章策略 3）：
+  - 仅当 `visibility=external+internal` 时，允许出现“仅内部”内容；此类内容必须被设计为独立章节，并在标题末尾追加 `internal_section_suffix`（默认 `（内部章节）`）。
+  - “仅内部”章节可出现在一级/二级/三级标题中，但必须是整节内部，不得用普通章节承载零散内部信息。
+  - 对 `visibility=internal-only` 的文档（如部门规划默认）：不强制添加后缀（除非用户明确要求区分更敏感小节）。
 - 针对文档类型自动选择侧重点（从 clarify/constitution 判断）：
   - 技术方案：约束、选项对比、决策准则、推荐方案、风险与缓解、里程碑/回滚。
   - 产品方案：用户/场景、问题与机会、目标与成功标准、方案概述（含范围/优先级）、验证计划、风险与依赖。
@@ -23,6 +34,7 @@
 ## 草稿骨架（写入 draft.md）
 - 以 Markdown 形式生成：标题、摘要（可空）、目录（可选）、然后按 `[Sxx]` 顺序列出每个一级标题。
 - 每个一级标题下放一个占位符：`<!-- TODO:Sxx -->`，便于后续自动填充。
+- 额外规则：每个一级标题对应的正文最终必须在章节末尾包含 1 段“本章节总结性描述”（总结本节覆盖了什么内容，≠结论）；后续 `doc.section` 会负责生成。
 
 ## 跳步补齐（必须支持）
 如果用户跳过澄清直接要大纲：先生成/更新 `constitution.md` 与 `clarify.md`，再出 `outline.md`。
