@@ -7,10 +7,11 @@
 - 可见性默认：
   - 技术方案、产品方案：对外 + 对内可用（`external+internal`）
   - 部门规划：仅内部（`internal-only`）
-- 输出策略（已确定采用 3）：同一份文档中允许存在“仅内部”内容，但必须用明确标记隔离：`【Internal Only】`。
-  - 对外分享时：必须删除/不导出所有 `【Internal Only】` 段落/章节。
+- 输出策略（已确定采用 3）：同一份文档中允许存在“仅内部”内容，但只能放在独立章节中，并在章节标题末尾追加“（内部章节）”。
+  - 内部章节可出现在一级/二级/三级标题中，但必须是“整节内部”，不得在普通章节段落内零散插入仅内部句子。
+  - 对外分享时：必须删除/不导出所有“（内部章节）”章节（含其子章节）。
   - 对内评审时：保留全部内容。
-- 交付形态：专业 Markdown；默认每个一级标题（H1）下先给一段“本章节总结性描述”（1 段即可），再展开细节。
+- 交付形态：专业 Markdown；默认每个一级标题（H1）下先给一段“本章节总结性描述”（1 段即可，用来说明本节写了什么），再展开细节（总结段≠结论）。
 - 参考篇幅：技术方案约 20 页、产品方案约 20 页、部门规划约 15 页（可根据用户要求调整）。
 
 ---
@@ -32,8 +33,8 @@ doc_type: tech-proposal | product-plan | dept-plan
 title: "[待确认]"
 audience: "客户业务/产品/技术；公司产品/技术；CEO"
 visibility: "external+internal | internal-only"
-visibility_strategy: "single-doc-with-internal-tags"
-internal_mark: "【Internal Only】"
+visibility_strategy: "single-doc-with-internal-sections"
+internal_section_suffix: "（内部章节）"
 target_length_pages: 20
 output_file: "./[待确认].md"
 data_source_priority: "user-specified > external"
@@ -44,10 +45,20 @@ plan_horizon_years: 3
 ---
 ```
 
+默认值规则（必须遵守；用户明确指定时以用户为准）：
+- 若用户明确指定 `visibility`：以用户为准；否则按 `doc_type` 默认：
+  - `tech-proposal` / `product-plan` → `external+internal`
+  - `dept-plan` → `internal-only`
+- 若用户未指定 `target_length_pages` / `output_file`：按 `doc_type` 默认：
+  - `tech-proposal` → `target_length_pages: 20`，`output_file: ./tech-proposal.md`
+  - `product-plan` → `target_length_pages: 20`，`output_file: ./product-plan.md`
+  - `dept-plan` → `target_length_pages: 15`，`output_file: ./dept-plan.md`
+
 ### 1) 可见性与脱敏规则（必须写；采用策略 3）
 用项目符号给出可执行规则（建议 6–10 条）：
-- `【Internal Only】` 的使用边界：哪些内容必须标内部（人力/薪资预算、组织与编制、内部系统细节、客户敏感信息、供应商底价等）。
-- 对外版本的生成规则：导出/分享前必须移除所有 `【Internal Only】` 内容；若移除造成论证断裂，要补“可公开说明的替代表述”或改为 `[待确认:可披露口径]`。
+- “（内部章节）”的使用边界：哪些内容必须放入内部章节（人力/薪资预算、组织与编制、内部系统细节、客户敏感信息、供应商底价等）。
+- 标注方式：仅通过“章节标题追加（内部章节）”来标识；不得在普通章节内用零散标记混写。
+- 对外版本的生成规则：导出/分享前必须移除所有“（内部章节）”章节（含其子章节）；若移除造成论证断裂，要补“可公开说明的替代表述”或改为 `[待确认:可披露口径]`。
 - 数据与证据：对外优先可公开引用/可披露的来源；内部允许引用内部报表/日志/财务口径，但必须给时间戳与口径。
 - 安全与合规：任何涉及隐私/安全/合规的内容，对外必须用抽象描述，必要时脱敏；内部可给更细的控制项与责任人。
 
@@ -56,7 +67,7 @@ plan_horizon_years: 3
 - 读者与决策：谁决策/什么决策/成功标准口径
 - 文档类型与边界：技术方案 / 产品方案 / 部门规划；明确不覆盖范围
 - 结构规范：结论前置；每节包含证据与行动项；必须给出风险与缓解；必须给出里程碑（如适用）
-- 章节摘要规则：每个 H1 下先写 1 段总结性描述，再展开（适用于最终 Markdown）
+- 章节摘要规则：每个 H1 下先写 1 段总结性描述（说明“本节包含什么内容/覆盖范围”，不是结论），再展开（适用于最终 Markdown）
 - 事实与引用：所有数字/主张需标注来源或占位符；不确定处用 `[待确认]`；不得编造数据/引用
 - 语气与术语：简洁、动作导向；少形容词；术语一致（维护术语表）
 - 可执行性：行动项必须包含 Owner/时间节点/依赖（可缺省但需标注）
@@ -67,7 +78,7 @@ plan_horizon_years: 3
 后续每一步（clarify/outline/section/compress/style/facts/qacheck）：
 - 需要用户补充什么输入
 - 缺失时如何处理（最小化提问/标 `[待确认]` / 先输出数据清单）
-- 如何遵守“可见性策略 3”（内部内容必须打 `【Internal Only】` 标记）
+- 如何遵守“可见性策略 3”（内部内容必须放在标题带“（内部章节）”的独立章节中）
 
 ### 4) 确认问题（最多 5 个）
 仅问“决定宪章是否成立”的关键缺口，例如：
