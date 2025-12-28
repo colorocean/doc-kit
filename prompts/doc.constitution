@@ -30,6 +30,9 @@
 用 YAML frontmatter 输出以下字段（可先给默认值；缺失则写 `[待确认]`）：
 ```yaml
 ---
+doc_id: "[待确认:用于跨轮次连续性]"
+constitution_rev: 1
+updated_at: "[待确认:YYYY-MM-DD]"
 doc_type: tech-proposal | product-plan | dept-plan
 title: "[待确认]"
 audience: "客户业务/产品/技术；公司产品/技术；CEO"

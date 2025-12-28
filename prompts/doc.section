@@ -21,12 +21,27 @@
 - 对于 `visibility=external+internal`：任何“仅内部”内容必须放在标题末尾带 `internal_section_suffix` 的独立子章节中（H2/H3 均可），不得散落在普通段落里。
 - 对于 `visibility=internal-only`：默认不强制使用“内部章节”后缀（除非用户要求区分更敏感小节）。
 
+## 连续性与锁定（必须执行）
+执行前必须读取 `./doc-kit/clarify.md` 的 YAML frontmatter，并遵守：
+- `clarify_rev` / `change_type` / `change_summary`
+- `locked_sections` / `locked_topics`
+
+锁定规则：
+- 若目标章节 ID 在 `locked_sections` 中：不得修改该章节内容；仅输出“跳过原因 + 需要用户如何解除锁定”，并给出推荐下一步指令。
+- 若章节不在锁定列表：只允许更新该章节对应的文件与 `draft.md` 中该章节占位符；不得触碰其他章节。
+
 ## 章节选择（必须支持）
 - 如果用户指定章节 ID（如 `S03`）或章节标题：按指定生成。
 - 如果用户未指定：自动选择第一个仍为占位符的章节（在 `draft.md` 中查找 `<!-- TODO:Sxx -->`）。
 - 若大纲未落盘：先自动补 `doc.outline`（并落盘）再继续。
 
 ## 单节输出格式（写入 section.md 与 sections/Sxx.md）
+在正文前必须写一个简短的“章节头信息”（用于连续性；2-4 行即可）：
+- `section_id: Sxx`
+- `based_on_clarify_rev: <number>`
+- `updated_at: <YYYY-MM-DD>`
+- `status: draft | updated | skipped-locked`
+
 1) 结论：一句话回答本节核心问题。
 2) 证据/依据（3-5 条）：数据/实验/用户洞察/行业案例，注明来源或占位符（如 `[source:?]`）。
 3) 风险/反对观点：潜在问题、假设、盲区（标注 `[待确认]`）。

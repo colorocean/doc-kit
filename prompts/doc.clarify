@@ -15,7 +15,28 @@
 - 若用户在对话中给出的信息与 `constitution.md` 冲突：以 `constitution.md` 为准，并在 `clarify.md` 中记录冲突点，提示用户修改 `constitution.md` 后再继续。
 
 ## clarify.md 输出结构（必须写入）
-clarify.md 需包含 3 个区块：`元信息校验`、`三行澄清`、`补充清单`。
+clarify.md 需包含 4 个区块：`元信息与变更`、`元信息校验`、`三行澄清`、`补充清单`。
+
+### 0) 元信息与变更（必须放在文件最开头）
+用 YAML frontmatter 写入以下字段（缺失则写 `[待确认]`）：
+```yaml
+---
+doc_id: "[从 constitution.md 读取；若缺失则写待确认]"
+clarify_rev: 1
+based_on_constitution_rev: "[从 constitution.md 读取；若缺失则待确认]"
+updated_at: "[YYYY-MM-DD]"
+change_type: "initial | major-update | minor-update"
+change_summary: "[本次变更一句话]"
+change_details: "[本次变更要点，建议 3-7 条]"
+locked_sections: "[]  # 例如 [S01,S04]；表示本轮不允许改动的章节"
+locked_topics: "[]    # 例如 [预算口径,术语表]；表示不允许被本轮变更影响的主题"
+---
+```
+
+变更规则（必须遵守）：
+- 若 `clarify.md` 已存在：必须读取旧文件并将 `clarify_rev` +1；保留旧内容中用户手改的部分，仅在“本次变更”范围内更新。
+- 若用户未显式说明变更：默认 `change_type=minor-update` 且 `change_summary=补充细节`。
+- `locked_sections`/`locked_topics` 优先级很高：后续 `doc.outline/doc.section` 必须据此避免影响不需要修改的内容。
 
 ### A) 元信息校验（从 constitution.md 读取后填入）
 以项目符号写清楚（缺失用 `[待确认]`）：
