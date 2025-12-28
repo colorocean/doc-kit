@@ -1,0 +1,36 @@
+doc_type: dept-plan
+display_name: 部门规划
+default_visibility: internal-only
+default_target_length_pages: 15
+default_output_file: ./dept-plan.md
+audience_default: 公司产品/技术人员；公司CEO
+
+internal_section_suffix: "（内部章节）"
+
+methodology:
+  required: true
+  preference: "[用户指定优先；否则 AI 提炼]"
+  ai_fallback_examples:
+    - "一体两翼三闭环"
+    - "三段式：目标-路径-保障"
+  output_requirements:
+    - "命名（可记忆）"
+    - "3-7 条原则/构件定义"
+    - "框架→章节映射"
+
+required_h1_sections:
+  - 概要与结论
+  - 部门使命与定位
+  - 现状与差距
+  - 三年目标与北极星指标
+  - 方法论与分析框架
+  - 分段路线图与里程碑（越近越细）
+  - 组织与人力规划
+  - 预算与资源规划（年薪资口径）
+  - 风险与保障机制
+
+outline_focus:
+  - 三年分段规划与里程碑颗粒度
+  - 人力与预算口径清晰（年薪资，10万级别）
+  - 治理机制与风险保障
+

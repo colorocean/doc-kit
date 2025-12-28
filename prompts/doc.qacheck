@@ -19,6 +19,9 @@
 - 方法论：
   - 检查是否存在“方法论/分析框架”章节（或等价内容），并且后续章节是否引用/对齐该框架。
   - 若使用 AI 自行提炼的方法论：检查是否包含“命名 + 原则/构件定义 + 框架→章节映射”，否则列为缺失项。
+- 文档类型针对性：
+  - 从 `constitution.md` 读取 `doc_type_config_path`；若可读取配置文件，检查是否覆盖 `required_h1_sections`（可容许同义改名，但必须语义覆盖）。
+  - 若缺失配置文件：提示用户补齐/新增 `reference/doc-types/<doc_type>.yaml` 以获得稳定的类型化支撑。
 - 连续性：
   - 读取 `clarify.md` 的 `clarify_rev` 与 `locked_sections`。
   - 若存在 `./doc-kit/sections/S*.md`：检查每个文件是否包含 `based_on_clarify_rev:`，并与当前 `clarify_rev` 一致；不一致则列入缺失项。

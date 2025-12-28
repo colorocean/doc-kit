@@ -12,6 +12,7 @@
   - `doc_type` / `visibility`
   - `visibility_strategy` / `internal_section_suffix`
   - `target_length_pages` / `output_file`
+- 读取并记录 `doc_type_config_path`；若宪章未提供或无法读取配置文件，则在补充清单中要求补齐配置来源。
 - 若用户在对话中给出的信息与 `constitution.md` 冲突：以 `constitution.md` 为准，并在 `clarify.md` 中记录冲突点，提示用户修改 `constitution.md` 后再继续。
 
 ## clarify.md 输出结构（必须写入）

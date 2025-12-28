@@ -2,6 +2,17 @@
 
 ---
 
+## 文档类型配置（必须读取）
+为实现“不同文档类型的针对性支撑 + 可扩展新增类型”，你必须读取对应的文档类型配置 YAML，并以其作为默认值来源（用户明确指定时以用户为准）。
+
+配置文件位置优先级（按顺序尝试找到并读取其一）：
+1) 当前仓库：`reference/doc-types/<doc_type>.yaml`
+2) 已安装 skill：`~/.codex/skills/doc-kit/reference/doc-types/<doc_type>.yaml`（或 `$CODEX_HOME/skills/doc-kit/reference/doc-types/<doc_type>.yaml`）
+
+若找不到配置文件：
+- 允许继续，但必须在 “确认问题” 中要求用户提供该配置或确认临时默认值；
+- 并建议用户在 `reference/doc-types/` 下新增对应 `<doc_type>.yaml`，以后即可复用。
+
 ## 适用范围（默认假设；若用户已明确则以用户为准）
 - 文档类型：本次仅生成三类文档之一（不要强行三合一）：技术方案 / 产品方案 / 部门规划。
 - 可见性默认：
@@ -34,15 +45,16 @@ doc_id: "[待确认:用于跨轮次连续性]"
 constitution_rev: 1
 updated_at: "[待确认:YYYY-MM-DD]"
 doc_type: tech-proposal | product-plan | dept-plan
+doc_type_config_path: "[已读取的 <doc_type>.yaml 路径]"
 title: "[待确认]"
-audience: "客户业务/产品/技术；公司产品/技术；CEO"
+audience: "[默认来自 doc_type 配置；用户可覆盖]"
 visibility: "external+internal | internal-only"
 visibility_strategy: "single-doc-with-internal-sections"
-internal_section_suffix: "（内部章节）"
+internal_section_suffix: "[默认来自 doc_type 配置]"
 target_length_pages: 20
 output_file: "./[待确认].md"
 methodology_required: true
-methodology_preference: "[待确认:若无则由 AI 提炼]"
+methodology_preference: "[默认来自 doc_type 配置；若无则由 AI 提炼]"
 data_source_priority: "user-specified > external"
 budget_scope: "salary-only"
 budget_granularity: "100k-level"
@@ -52,13 +64,9 @@ plan_horizon_years: 3
 ```
 
 默认值规则（必须遵守；用户明确指定时以用户为准）：
-- 若用户明确指定 `visibility`：以用户为准；否则按 `doc_type` 默认：
-  - `tech-proposal` / `product-plan` → `external+internal`
-  - `dept-plan` → `internal-only`
-- 若用户未指定 `target_length_pages` / `output_file`：按 `doc_type` 默认：
-  - `tech-proposal` → `target_length_pages: 20`，`output_file: ./tech-proposal.md`
-  - `product-plan` → `target_length_pages: 20`，`output_file: ./product-plan.md`
-  - `dept-plan` → `target_length_pages: 15`，`output_file: ./dept-plan.md`
+- 若用户未指定 `visibility/target_length_pages/output_file/audience/internal_section_suffix/methodology_preference`：
+  - 默认从 `doc_type` 配置文件读取（`default_visibility/default_target_length_pages/default_output_file/audience_default/internal_section_suffix/methodology`）。
+  - 若配置缺失字段，再使用你在宪章中给出的临时默认值，并在“确认问题”中要求用户补齐配置。
 
 ### 1) 可见性与脱敏规则（必须写；采用策略 3）
 用项目符号给出可执行规则（建议 6–10 条）：

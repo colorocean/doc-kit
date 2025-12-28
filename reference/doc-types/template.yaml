@@ -1,0 +1,31 @@
+doc_type: "[unique-id เช่น tech-proposal]"
+display_name: "[中文名称]"
+default_visibility: "external+internal | internal-only"
+default_target_length_pages: 20
+default_output_file: "./[default].md"
+audience_default: "客户业务/产品/技术；公司产品/技术；CEO"
+
+internal_section_suffix: "（内部章节）"
+
+methodology:
+  required: true
+  preference: "[可选：用户指定优先；否则 AI 提炼]"
+  ai_fallback_examples:
+    - "一体两翼三闭环"
+    - "三段式：目标-路径-保障"
+  output_requirements:
+    - "命名（可记忆）"
+    - "3-7 条原则/构件定义"
+    - "框架→章节映射（明确哪些章节对应框架哪一部分）"
+
+required_h1_sections:
+  - "[一级章节标题 1]"
+  - "[一级章节标题 2]"
+
+outline_focus:
+  - "[侧重点 1]"
+  - "[侧重点 2]"
+
+notes:
+  - "[可选：写作注意事项]"
+

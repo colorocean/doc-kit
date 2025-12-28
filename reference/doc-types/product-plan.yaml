@@ -1,0 +1,35 @@
+doc_type: product-plan
+display_name: 产品方案
+default_visibility: external+internal
+default_target_length_pages: 20
+default_output_file: ./product-plan.md
+audience_default: 客户业务/产品/技术；公司产品/技术；CEO
+
+internal_section_suffix: "（内部章节）"
+
+methodology:
+  required: true
+  preference: "[用户指定优先；否则 AI 提炼]"
+  ai_fallback_examples:
+    - "一体两翼三闭环"
+    - "三层漏斗：用户-场景-价值"
+  output_requirements:
+    - "命名（可记忆）"
+    - "3-7 条原则/构件定义"
+    - "框架→章节映射"
+
+required_h1_sections:
+  - 概要与结论
+  - 用户与场景
+  - 问题与机会
+  - 目标与成功指标
+  - 方法论与分析框架
+  - 方案概述（范围与优先级）
+  - 交付与验证计划
+  - 风险、依赖与治理
+
+outline_focus:
+  - 用户/场景/价值链路清晰
+  - 范围与优先级可执行
+  - 指标口径与验证计划闭环
+

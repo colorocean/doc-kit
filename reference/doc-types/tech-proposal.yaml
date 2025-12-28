@@ -1,0 +1,36 @@
+doc_type: tech-proposal
+display_name: 技术方案
+default_visibility: external+internal
+default_target_length_pages: 20
+default_output_file: ./tech-proposal.md
+audience_default: 客户业务/产品/技术；公司产品/技术；CEO
+
+internal_section_suffix: "（内部章节）"
+
+methodology:
+  required: true
+  preference: "[用户指定优先；否则 AI 提炼]"
+  ai_fallback_examples:
+    - "一体两翼三闭环"
+    - "五段式：现状-约束-选项-决策-落地"
+  output_requirements:
+    - "命名（可记忆）"
+    - "3-7 条原则/构件定义"
+    - "框架→章节映射"
+
+required_h1_sections:
+  - 概要与结论
+  - 背景与目标
+  - 约束与假设
+  - 方法论与分析框架
+  - 方案选项与对比
+  - 推荐方案与架构
+  - 成本/容量/资源估算
+  - 风险与回滚
+  - 里程碑与执行计划
+
+outline_focus:
+  - 约束与假设显式化
+  - 选项对比与决策准则
+  - 风险/回滚/里程碑可落地
+
