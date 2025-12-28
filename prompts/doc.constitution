@@ -41,6 +41,8 @@ visibility_strategy: "single-doc-with-internal-sections"
 internal_section_suffix: "（内部章节）"
 target_length_pages: 20
 output_file: "./[待确认].md"
+methodology_required: true
+methodology_preference: "[待确认:若无则由 AI 提炼]"
 data_source_priority: "user-specified > external"
 budget_scope: "salary-only"
 budget_granularity: "100k-level"
@@ -73,6 +75,12 @@ plan_horizon_years: 3
 - 文档类型与边界：技术方案 / 产品方案 / 部门规划；明确不覆盖范围
 - 结构规范：结论前置；每节包含证据与行动项；必须给出风险与缓解；必须给出里程碑（如适用）
 - 章节摘要规则：每个 H1 必须包含 1 段总结性描述（说明“本节包含什么内容/覆盖范围”，不是结论），放在该章节末尾（适用于最终 Markdown）
+- 方法论支撑（必须）：全文需有明确的方法论/分析框架支撑关键论证。
+  - 优先使用成熟方法论（如适用）；若不适用或用户未提供，则 AI 需自行提炼一个“可复用的方法论”，并给出：
+    - 方法论名称（可类似“一体两翼三闭环”等可记忆命名）
+    - 3–7 条原则/构件定义（每条 1 句话）
+    - “框架 → 章节”的映射（说明哪些章节对应框架哪一部分）
+  - 方法论需出现在文档早期（建议单独一节），并在后续章节中被引用/对齐。
 - 事实与引用：所有数字/主张需标注来源或占位符；不确定处用 `[待确认]`；不得编造数据/引用
 - 语气与术语：简洁、动作导向；少形容词；术语一致（维护术语表）
 - 可执行性：行动项必须包含 Owner/时间节点/依赖（可缺省但需标注）
