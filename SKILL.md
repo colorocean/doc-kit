@@ -15,7 +15,7 @@ metadata:
 - `$doc-kit --help`
 - `$doc-kit doc.help`
 - `$doc-kit doc.constitution`
-- `$doc-kit doc.clarify` / `doc.outline` / `doc.section` / `doc.compress` / `doc.style` / `doc.facts` / `doc.qacheck`
+- `$doc-kit doc.clarify` / `doc.outline` / `doc.section` / `doc.compress` / `doc.style` / `doc.facts` / `doc.qacheck` / `doc.render.ceo`
 
 ## 自动落盘
 执行过程中会把中间产物写到当前工作目录的 `./doc-kit/` 下，并在进入下一步前从磁盘重新读取前序文件以吸收人工修改。
@@ -30,6 +30,7 @@ metadata:
 - `doc.style`：风格一致性与术语统一
 - `doc.facts`：列出需引用/来源的语句并标注缺口
 - `doc.qacheck`：结构/覆盖面 QA 检查
+- `doc.render.ceo`：将执行版重排为 CEO 汇报稿（正文精简、细节下沉附录）
 
 ## Reference（位于 `reference/`）
 - 大纲/段落模板：`outline-template.md`、`section-template.md`

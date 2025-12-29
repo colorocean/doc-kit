@@ -2,11 +2,13 @@
 
 1) 说明 `prompts/doc.*` 是提示词文件路径，不是 Codex 指令；在对话中用 `$doc-kit` 触发 skill。
 2) 给出最常用的调用方式示例（例如 `$doc-kit doc.clarify`，或“请按 doc.clarify 模板...”）。
-3) 列出全部模板（doc.constitution / doc.clarify / doc.outline / doc.section / doc.compress / doc.style / doc.facts / doc.qacheck）及一句话用途。
+3) 列出全部模板（doc.constitution / doc.clarify / doc.outline / doc.section / doc.compress / doc.style / doc.facts / doc.qacheck / doc.render.ceo）及一句话用途。
 4) 给出推荐流程（约束宪章→澄清→大纲→分段→压缩→风格→事实→QA）以及每步需要用户提供的输入。
 5) 全程中文、简洁、用项目符号输出，不要长篇解释。
 
 额外要求（必须包含）：
 - 说明落盘规则：中间产物写到当前工作目录 `./doc-kit/` 下（`constitution.md`、`clarify.md`、`outline.md`、`draft.md`、`compress.md`、`style.md`、`facts.md`、`qacheck.md`、`sections/*.md`）。
 - 说明“重新读取”原则：进入下一步前会从磁盘重新读取前序文件，以吸收人工修改。
+- 说明 `doc.section` 对 `dept-plan`（部门规划）默认输出“CEO 汇报稿风格”（更叙事、更可读，减少四段式标签）；若你希望严格按“结论-证据-风险-行动”四段式，请在输入里显式要求。
 - 每一步末尾提示推荐的下一步指令（例如 `下一步：$doc-kit doc.outline`）。
+- 补充一个“呈现版”指令：`$doc-kit doc.render.ceo`（将执行版重排为 CEO 汇报稿）。

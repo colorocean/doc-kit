@@ -36,7 +36,8 @@
 4) 压缩润色：用 `doc.compress`（`prompts/doc.compress`）控制长度和语气  
 5) 风格与术语：用 `doc.style`（`prompts/doc.style`）统一语气与术语表  
 6) QA/事实核查：用 `doc.qacheck`（`prompts/doc.qacheck`）和 `doc.facts`（`prompts/doc.facts`）进行缺口与来源检查  
-6) 按文档类型套模板：参考 `reference/*-template.md`  
+7) （可选）渲染成 CEO 汇报稿：用 `doc.render.ceo`（`prompts/doc.render.ceo`）把“执行版/机制版”重排为可读汇报稿（正文精简、细节下沉附录）  
+8) 按文档类型套模板：参考 `reference/*-template.md`  
 
 ## 使用示例：写一份「实时日志聚合与告警」技术方案
 场景：你是 SRE/平台团队，需要在 2 个月内为核心服务落地统一日志聚合与实时告警；已知约束为「日均 2TB、峰值 5x、仅内部云、预算 < ¥30k/月」。
